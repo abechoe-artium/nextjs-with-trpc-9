@@ -7,6 +7,10 @@ const DirectComponent = () => {
     // directTrpcClient.query('sofa').then ((data) => {
     //     console.log('a sofa appears!', data)
     // })
+
+    // what we think it should be, according the docs:
+    console.log('greeting', directTrpcClient.greeting.query())
+    // ...but it doesn't work
     
     return <div>
         Sofa!
