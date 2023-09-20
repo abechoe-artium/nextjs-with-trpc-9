@@ -12,7 +12,7 @@
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.20.7", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.7.2", "@babel/runtime@^7.9.0":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.20.7", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.7.2":
   version "7.22.15"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.15.tgz#38f46494ccf6cf020bd4eed7124b425e83e523b8"
   integrity sha512-T0O+aa+4w0u06iNmapipJXMV4HoUir03hpx3/YqXXhu9xim3w+dVphjFWl1OH8NbZHw5Lbm9k45drDkgq2VNNA==
@@ -192,32 +192,40 @@
   dependencies:
     tslib "^2.4.0"
 
-"@trpc/client@9.27.3":
-  version "9.27.3"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.27.3.tgz#c998ca1e4e875110e6b4394c98d8ba993b068077"
-  integrity sha512-tFAGepqgvK8+V5PQycigCP2VUE34BNxlu+tXoq4jgXtdPUwlZsjfj/3L+jXuslK405oNNAx+r1BAekG2G7RgEA==
-  dependencies:
-    "@babel/runtime" "^7.9.0"
+"@tanstack/query-core@4.35.3":
+  version "4.35.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.35.3.tgz#1c127e66b4ad1beeac052db83a812d7cb67369e1"
+  integrity sha512-PS+WEjd9wzKTyNjjQymvcOe1yg8f3wYc6mD+vb6CKyZAKvu4sIJwryfqfBULITKCla7P9C4l5e9RXePHvZOZeQ==
 
-"@trpc/next@9.27.3":
-  version "9.27.3"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.27.3.tgz#d6672545562c9c89dd4fd65ee756122744ba07ed"
-  integrity sha512-YsjyEWU8JdpbjkAl1x3I3VV6YspRLRJL2ncRgjq/+Unaz9uA/Qcy8Tl2QxEYZX6FCp1cHIlZ6EHQSQCC1hNUCQ==
+"@tanstack/react-query@^4.35.3":
+  version "4.35.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.35.3.tgz#03d726ef6a19d426166427c6539b003dd9606d1b"
+  integrity sha512-UgTPioip/rGG3EQilXfA2j4BJkhEQsR+KAbF+KIuvQ7j4MkgnTCJF01SfRpIRNtQTlEfz/+IL7+jP8WA8bFbsw==
   dependencies:
-    "@babel/runtime" "^7.9.0"
+    "@tanstack/query-core" "4.35.3"
+    use-sync-external-store "^1.2.0"
+
+"@trpc/client@^10.38.3":
+  version "10.38.3"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.38.3.tgz#42d895cdbbf8359f0c650c53b817f7b412794f5b"
+  integrity sha512-hHPsElTL4sB+UGzuAZ4iwRVHjELrk/Nsl2owsYw9ITJz3EY7VWRsQ6vK48kJvlHPYPhP+efID5UOgyZMs4bFXA==
+
+"@trpc/next@^10.38.3":
+  version "10.38.3"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.38.3.tgz#774983bdda459ce40d5591e563d460d311e1240c"
+  integrity sha512-9dTThNtkcJG2ICzgVHu9zZWkDAnmYi8NOjv3TVNzO1SiWlIbgE4OUiD8xamMiP7A0VS1qZmo5T+5VrQdMDQlVA==
+  dependencies:
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react@9.27.3":
-  version "9.27.3"
-  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.27.3.tgz#5eff5723d9397d7300c7e45efcb2a06ded77a34d"
-  integrity sha512-w15aIbkCtUxNy7+CKQypkPF573muszaOg6lXmfW5kIO+1up74kQ1T4BLC46suK9kdDroBCJaxRbyz/oxMbK0Dw==
-  dependencies:
-    "@babel/runtime" "^7.9.0"
+"@trpc/react-query@^10.38.3":
+  version "10.38.3"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.38.3.tgz#f92f0ef9e8091964bebb23795341f9e6ea02615b"
+  integrity sha512-j4xxg/y+vssGinZCrNQy0SMJNL2Nv8k3HcqMKa2mYt3jxOpaHuwxgarWvLWVqrUJqvp1JpGJ9sIjlOAZam5FeQ==
 
-"@trpc/server@9.27.3":
-  version "9.27.3"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.27.3.tgz#1860502f464a4a996ce84f53ba257582fd96c45e"
-  integrity sha512-RHWD9xjE+A9UaQCVYkqjl0sbGaHfvlUqJH3e1I57F2ztJbMeFYoP47pVgjkg0CLYSuRDa3imtD4dVDZ4DcODjQ==
+"@trpc/server@^10.38.3":
+  version "10.38.3"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.38.3.tgz#0f0b7c2851239eb6d3d24756193f639a5385d567"
+  integrity sha512-9s8/kwo2IDB5hwB2SKZZrfevRhdb1f9fdXtIYd3lbQuf2jQaC/LyQuHaIQjDQoUx9updBfsHXcFFPiCP1DL6pg==
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -615,6 +623,13 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
+
+copy-anything@^3.0.2:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/copy-anything/-/copy-anything-3.0.5.tgz#2d92dce8c498f790fa7ad16b01a1ae5a45b020a0"
+  integrity sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==
+  dependencies:
+    is-what "^4.1.8"
 
 cross-spawn@^7.0.2:
   version "7.0.3"
@@ -1527,6 +1542,11 @@ is-weakset@^2.0.1:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+is-what@^4.1.8:
+  version "4.1.15"
+  resolved "https://registry.yarnpkg.com/is-what/-/is-what-4.1.15.tgz#de43a81090417a425942d67b1ae86e7fae2eee0e"
+  integrity sha512-uKua1wfy3Yt+YqsD6mTUEa2zSi3G1oPlqTflgaPJ7z63vUGN5pxFpnQfeSLMFnJDEsdvOtkp1rUWkYjB4YfhgA==
+
 isarray@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-2.0.5.tgz#8af1e4c1221244cc62459faf38940d4e644a5723"
@@ -2317,6 +2337,13 @@ sucrase@^3.32.0:
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
 
+superjson@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/superjson/-/superjson-1.13.1.tgz#a0b6ab5d22876f6207fcb9d08b0cb2acad8ee5cd"
+  integrity sha512-AVH2eknm9DEd3qvxM4Sq+LTCkSXE2ssfh1t11MHMXyYXFQyQ1HLgVvV+guLTsaQnJU3gnaVo34TohHPulY/wLg==
+  dependencies:
+    copy-anything "^3.0.2"
+
 supports-color@^7.1.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-7.2.0.tgz#1b7dcdcb32b8138801b3e478ba6a51caa89648da"
@@ -2501,6 +2528,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-sync-external-store@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
 
 util-deprecate@^1.0.2:
   version "1.0.2"

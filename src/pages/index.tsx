@@ -6,7 +6,13 @@ import { trpc } from '../utils/trpcHooks';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const hello = trpc.useQuery(['hello', { text: 'from trpc9' }]);
+  // v9 legacy queries continue to look like this
+  const hello = trpc.useQuery(['hello', { text: 'from trpc10 legacy router!' }])
+  
+  // v10 new router queries look like this
+  const result = trpc.proxy.greeting.useQuery()
+  console.log('result: ', result);
+  
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}

@@ -1,8 +1,25 @@
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { z } from 'zod';
+import { initTRPC } from '@trpc/server';
+import superjson from 'superjson';
 
-export const appRouter = trpc.router()
+const t = initTRPC.create({
+  // Optional:
+  transformer: superjson,
+  // Optional:
+  errorFormatter(opts) {
+    const { shape } = opts;
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+      },
+    };
+  },
+});
+
+export const legacyRouter = trpc.router()
 .query('sofa', {
     resolve: () => ({
         foo: 'bar'
@@ -19,7 +36,17 @@ export const appRouter = trpc.router()
       greeting: `hello ${input?.text ?? 'world'}`,
     };
   },
+})
+.interop();
+
+const mainRouter = t.router({
+  greeting: t.procedure.query(() => 'hello from tRPC v10!'),
 });
+
+// Merge v9 router with v10 router
+// This is necessary because it somehow decorates the legacy router 
+// with what v10 needs to work.
+export const appRouter = t.mergeRouters(legacyRouter, mainRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
@@ -30,5 +57,6 @@ export type AppRouter = typeof appRouter;
 // to NextJS handler functions (cf. hello.ts)
 export default trpcNext.createNextApiHandler({
   router: appRouter,
-  createContext: () => null,
+  // Note null is no long a valid return type. Probably doesn't matter for us.
+  createContext: () => ({}),
 });

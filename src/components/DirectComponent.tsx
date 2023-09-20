@@ -1,9 +1,12 @@
 import { directTrpcClient } from "@/utils/trpcHooks";
 
 const DirectComponent = () => {
-    directTrpcClient.query('sofa').then ((data) => {
-        console.log('a sofa appears!', data)
-    })
+    // TODO: fix the query syntax for direct queries
+    // directTrpcClient.proxy.greeting.query()
+    
+    // directTrpcClient.query('sofa').then ((data) => {
+    //     console.log('a sofa appears!', data)
+    // })
     
     return <div>
         Sofa!
