@@ -1,20 +1,24 @@
 import { directTrpcClient } from "@/utils/trpcHooks";
+import { useEffect, useState } from "react";
 
 const DirectComponent = () => {
-    // TODO: fix the query syntax for direct queries
-    // directTrpcClient.proxy.greeting.query()
-    
-    // directTrpcClient.query('sofa').then ((data) => {
-    //     console.log('a sofa appears!', data)
-    // })
-
     // what we think it should be, according the docs:
-    console.log('greeting', directTrpcClient.greeting.query())
-    // ...but it doesn't work
+    const [greeting, setGreeting] = useState('')
+
+    useEffect(() => {
+        const fetchGreeting = async () => {
+          const result = await directTrpcClient.greeting.query();
+          setGreeting(result.json);
+        }
+
+        fetchGreeting();
+    }, []);
     
-    return <div>
-        Sofa!
+    return (
+    <div>
+      Sofa! {greeting}
     </div>
+    )
 }
     
 export default DirectComponent
