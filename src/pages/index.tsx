@@ -1,4 +1,4 @@
-import { trpc, trpc10 } from '../utils/trpcHooks';
+import { trpc } from '../utils/trpcHooks';
 import React from 'react';
 
 
