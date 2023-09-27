@@ -34,15 +34,14 @@ const myVarDataValue = vi.fn()
   .mockReturnValueOnce('original value')
   .mockReturnValueOnce('updated value');
 
-// const mutationCallCounter = vi.fn()
+const mutationCallCounter = vi.fn()
 
 const server = setupServer(
     trpcMsw.getMyVar.query(async (req, res, ctx) => {
       return res(ctx.status(200), ctx.data(myVarDataValue()))
     }),
     trpcMsw.changeMyVar.mutation((req, res, ctx) => {
-      // mutationCallCounter()
-      console.log('mutation intercepted???????')
+      mutationCallCounter()
       return res(ctx.status(200), ctx.data('success!'))
     })
   )
@@ -76,10 +75,9 @@ describe("first test", () => {
         const updateGreetingButton = screen.getByRole('button');
         fireEvent.click(updateGreetingButton)
 
-        // expect(mutationCallCounter.mock.calls.length).toBe(1)
-
         const updated = await screen.findByText('updated value')
         expect(updated).toBeInTheDocument();
+        expect(mutationCallCounter.mock.calls.length).toBe(1)
     })
 })
 
