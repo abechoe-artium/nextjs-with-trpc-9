@@ -10,6 +10,13 @@ export default function Home() {
   // const result = trpc10.greeting.useQuery();
   const result = trpc.proxy.greeting.useQuery();
   // console.log('result: ', result);
+  const { mutate } = trpc.proxy.updateGreeting.useMutation();
+
+  function updateGreeting() {
+    console.log('before mutate is called');
+    mutate({ name: 'Bob' });
+    console.log('after mutate is called');
+  }
   
   return (
     <main
@@ -18,8 +25,8 @@ export default function Home() {
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         Hello World {hello.data?.greeting}
       </div> */}
-      <div>Loading? {result.isLoading}</div>
       <div>{result.data}</div>
+      <button onClick={updateGreeting}>Click Me for a new greeting!</button>
     </main>
   )
 }

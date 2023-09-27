@@ -1,7 +1,7 @@
 import Home from "../pages";
 // import { describe, it, expect, beforeAll, afterAll } from "@jest/globals";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import React, { PropsWithChildren } from 'react';
 import superjson from 'superjson';
@@ -32,9 +32,17 @@ const queryClient = new QueryClient({
 
 const server = setupServer(
     trpcMsw.greeting.query(async (req, res, ctx) => {
+      console.log('intercepted query');
       return res(ctx.status(200), ctx.data('foo'))
     }),
+    trpcMsw.updateGreeting.mutation((req, res, ctx) => {
+      console.log('intercepted mutation');
+      console.log(req.getInput())
+      return res(ctx.status(200), ctx.data('new greeting!'))
+    })
   )
+
+  server.printHandlers();
 
   beforeAll(() => {
     server.listen();
@@ -61,9 +69,24 @@ describe("first test", () => {
             { wrapper: withTRPC }
         )
         
-        // expect(screen.getByText('foo')).toBeInTheDocument();
-        // const items = await screen.findAllByText(/Item #[0-9]: /)
         const fooText = await screen.findByText('foo')
         expect(fooText).toBeInTheDocument();
+
+        const updateGreetingButton = screen.getByRole('button');
+        fireEvent.click(updateGreetingButton)
+
+        screen.debug();
+    })
+
+    it.skip('updates greeting', async () => {
+      render(
+        <Home />,
+        { wrapper: withTRPC }
+      );
+
+      const updateGreetingButton = screen.getByRole('button');
+      fireEvent.click(updateGreetingButton)
+
+      screen.debug();
     })
 })

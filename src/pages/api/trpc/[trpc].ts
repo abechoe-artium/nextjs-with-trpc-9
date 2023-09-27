@@ -41,6 +41,7 @@ export const legacyRouter = trpc.router()
 
 const mainRouter = t.router({
   greeting: t.procedure.query(() => 'hello from tRPC v10!'),
+  updateGreeting: t.procedure.input(z.object({ name: z.string() })).mutation((opts) => `new greeting for ${opts.input.name}`)
 });
 
 // Merge v9 router with v10 router
