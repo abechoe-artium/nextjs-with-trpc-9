@@ -1,6 +1,6 @@
 import Home from "../pages";
 // import { describe, it, expect, beforeAll, afterAll } from "@jest/globals";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { Mock, afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import React, { PropsWithChildren } from 'react';
@@ -30,15 +30,20 @@ const queryClient = new QueryClient({
     defaultOptions: { queries: { staleTime: Infinity } },
 });
 
+const myVarDataValue = vi.fn()
+  .mockReturnValueOnce('original value')
+  .mockReturnValueOnce('updated value');
+
+// const mutationCallCounter = vi.fn()
+
 const server = setupServer(
-    trpcMsw.greeting.query(async (req, res, ctx) => {
-      console.log('intercepted query');
-      return res(ctx.status(200), ctx.data('foo'))
+    trpcMsw.getMyVar.query(async (req, res, ctx) => {
+      return res(ctx.status(200), ctx.data(myVarDataValue()))
     }),
-    trpcMsw.updateGreeting.mutation((req, res, ctx) => {
-      console.log('intercepted mutation');
-      console.log(req.getInput())
-      return res(ctx.status(200), ctx.data('new greeting!'))
+    trpcMsw.changeMyVar.mutation((req, res, ctx) => {
+      // mutationCallCounter()
+      console.log('mutation intercepted???????')
+      return res(ctx.status(200), ctx.data('success!'))
     })
   )
 
@@ -59,34 +64,25 @@ export const withTRPC = ({ children }: PropsWithChildren) => {
         </trpcReact.Provider>
 )};
 
-
-
-
 describe("first test", () => {
     it('renders', async () => {
         render(
             <Home />,
             { wrapper: withTRPC }
-        )
-        
-        const fooText = await screen.findByText('foo')
-        expect(fooText).toBeInTheDocument();
+        ) 
+        const orig = await screen.findByText('original value')
+        expect(orig).toBeInTheDocument();
 
         const updateGreetingButton = screen.getByRole('button');
         fireEvent.click(updateGreetingButton)
 
-        screen.debug();
-    })
+        // expect(mutationCallCounter.mock.calls.length).toBe(1)
 
-    it.skip('updates greeting', async () => {
-      render(
-        <Home />,
-        { wrapper: withTRPC }
-      );
-
-      const updateGreetingButton = screen.getByRole('button');
-      fireEvent.click(updateGreetingButton)
-
-      screen.debug();
+        const updated = await screen.findByText('updated value')
+        expect(updated).toBeInTheDocument();
     })
 })
+
+function spyOn(mutationCallCounter: Mock<any, any>) {
+  throw new Error('Function not implemented.');
+}

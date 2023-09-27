@@ -4,6 +4,10 @@ import { z } from 'zod';
 import { initTRPC } from '@trpc/server';
 import superjson from 'superjson';
 
+const storage = {
+  myVar: 'foo'
+}
+
 const t = initTRPC.create({
   // Optional:
   transformer: superjson,
@@ -20,28 +24,35 @@ const t = initTRPC.create({
 });
 
 export const legacyRouter = trpc.router()
-.query('sofa', {
+  .query('sofa', {
     resolve: () => ({
-        foo: 'bar'
+      foo: 'bar'
     })
-})
-.query('hello', {
-  input: z
-    .object({
-      text: z.string().nullish(),
-    })
-    .nullish(),
-  resolve({ input }) {
-    return {
-      greeting: `hello ${input?.text ?? 'world'}`,
-    };
-  },
-})
-.interop();
+  })
+  .query('hello', {
+    input: z
+      .object({
+        text: z.string().nullish(),
+      })
+      .nullish(),
+    resolve({ input }) {
+      return {
+        greeting: `hello ${input?.text ?? 'world'}`,
+      };
+    },
+  })
+  .interop();
 
 const mainRouter = t.router({
   greeting: t.procedure.query(() => 'hello from tRPC v10!'),
-  updateGreeting: t.procedure.input(z.object({ name: z.string() })).mutation((opts) => `new greeting for ${opts.input.name}`)
+  getMyVar: t.procedure.query(() => storage.myVar),
+  changeMyVar: t.procedure
+    .input(z.object({ value: z.string() }))
+    .mutation((opts) => {
+      console.log('mutating value', opts.input.value)
+      storage.myVar = opts.input.value;
+      return opts.input.value;
+    })
 });
 
 // Merge v9 router with v10 router
